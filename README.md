@@ -14,6 +14,10 @@ Archived timelapses over the year:<br>
 - Sendx Apache mod
 - python 3.x
 
+### Viewer
+The viewer allows stepping through frames by pausing the video and pressing , and .<br>
+Thanks to [https://github.com/allensarkisyan/VideoFrame](https://github.com/allensarkisyan/VideoFrame).  I have included a copy of the js file in the repo.  It should be put in the `skins/classic/js` of Zoneminder.
+
 
 ### Installation
 - Download scripts here to your user's home directory (or wherever you like).  I put mine in `/home/tycon/timelapse`.  My user tycon is in the www-data group.
@@ -40,7 +44,7 @@ Archived timelapses over the year:<br>
      XSendFile On
      XSendFilePath "/external/zoneminder/tl"
     ```
-- Add `tl.php` to `/usr/share/zoneminder/www/skins/classic/views` or where your zzoneminder php view files are.
+- Add `tl.php` to `/usr/share/zoneminder/www/skins/classic/views` or where your zoneminder php view files are.
 
 ### Running
 - Run 

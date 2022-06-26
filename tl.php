@@ -56,7 +56,7 @@ function resize_image($file, $w, $h, $crop=FALSE) {
 <head>
  
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
+<script src="skins/classic/js/VideoFrame.min.js"></script>
 
 
  <style>
@@ -79,36 +79,44 @@ function resize_image($file, $w, $h, $crop=FALSE) {
 
 <script type="text/javascript">
 
-</script>
-<script>
 
 function updateslider(val)
 {
 	console.log(val);
 }
-
+var video;
 $(document).ready(function() {
 	
 	
 	var nextVideo = "../tl/c4/18_12_10_03_17.mpg";
-	var videoPlayer = document.getElementById('videoPlayer');
-	videoPlayer.onended = function(){
-		//videoPlayer.src = nextVideo;
-	}
-
-
+	
+	video = VideoFrame({
+			id : 'videoPlayer',
+			frameRate: 30,
+			callback : function(response) {
+			console.log('callback response: ' + response);
+		}
+		});
+	
+	
+	
 	
 	$( ".playvid" ).click(function() {
-	videoPlayer.src = $(this).attr('data-attr');
-	videoPlayer.load();
-	//videoPlayer.playbackRate = 10.0;
-	videoPlayer.play();
+
+	video.video.src = $(this).attr('data-attr');
+		video.video.load();
+		//videoPlayer.playbackRate = 10.0;
+		video.video.play();
+		console.log("test");
+
 	});
+		
 	
  
 
 		$("#videospeed").bind('onSlide', function(evt, val){
 		  updateslider(val);
+		  console.log(video.get() );
 		});
 
 	
@@ -129,6 +137,23 @@ $(document).ready(function() {
 });
 
 
+
+
+window.addEventListener('keypress', function (evt) {
+    if (video.video.paused) { //or you can force it to pause here
+        if (evt.keyCode === 44) { //, key
+            //one frame back
+  
+			
+			video.seekBackward(1);
+        } else if (evt.keyCode === 46) { // . key
+            //one frame forward
+
+			video.seekForward(1);
+        }
+		console.log(video.get() );
+    }        
+});
 
 
  </script>
