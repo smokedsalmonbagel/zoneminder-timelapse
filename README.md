@@ -1,2 +1,37 @@
 # zoneminder-timelapse
  
+Simple scripts to create daily timelapse videos from Zoneminder and archive them for viewing on the web.
+
+### Requirements
+
+- Zoneminder > 1.34.  I am testing with 1.36.19. 
+- Events must be stored as jpegs using the directory scheme which includes the date as a folder within the camera id folder.  This is true if using jpegs in 1.36.
+- Sendx Apache mod
+- python 3.x
+
+### Installation
+- Download scripts here to your user's home directory (or wherever you like).  I put mine in `/home/tycon/timelapse`.  My user tycon is in the www-data group.
+- Set the following variables in `maketl.py`
+  - `cams` - a list of camera ids you want to create timelapses for.
+  - `tl_destination` - the web directory you want to store the rendered timelapse videos
+  -  `log_path` - the location you want to store the script logs
+- Set the following variables in `get_frames.py`
+   - `event_path` - path to your zoneminder event directory. This dir should contain directories with camera numbers 1,2,3 etc
+- Set the following variables in `makeindex.php`
+  -  `$tl_destination` - the web directory you want to store the rendered timelapse videos (same as above)
+- Set the following variables in `tl.php`
+  -  `$tl_destination` - the web directory you want to store the rendered timelapse videos (same as above) 
+  -  `$tl_log` - the directory is the tl logs are located.  Same as `log_path` above. 
+- Install and enable the sendx apache mod
+  - `sudo apt-get install libapache2-mod-xsendfile`
+  - `sudo a2enmod xsendfile`
+  - Configure the xsendfile mod 
+     <br>```sudo nano mods-enabled/xsendfile.load``` 
+            
+    Should look like (add your own tl_destination path):     
+     ```
+     LoadModule xsendfile_module /usr/lib/apache2/modules/mod_xsendfile.so
+     XSendFile On
+     XSendFilePath "/external/zoneminder/tl"
+    ```
+- Add `tl.php` to `/usr/share/zoneminder/www/skins/classic/views` or where your zzoneminder php view files are.  
