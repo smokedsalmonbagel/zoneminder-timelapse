@@ -4,6 +4,9 @@ Simple scripts to create daily timelapse videos from Zoneminder events and archi
 
 ![alt text](./media/demo.gif)
 
+Archived timelapses over the year:<br>
+![alt text](./media/demo.png)
+
 ### Requirements
 
 - Zoneminder > 1.34.  I am testing with 1.36.19. 
