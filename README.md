@@ -1,6 +1,8 @@
 # zoneminder-timelapse
  
-Simple scripts to create daily timelapse videos from Zoneminder and archive them for viewing on the web.
+Simple scripts to create daily timelapse videos from Zoneminder events and archive them for viewing on the web.
+
+![alt text](./media/demo.gif)
 
 ### Requirements
 
@@ -8,6 +10,7 @@ Simple scripts to create daily timelapse videos from Zoneminder and archive them
 - Events must be stored as jpegs using the directory scheme which includes the date as a folder within the camera id folder.  This is true if using jpegs in 1.36.
 - Sendx Apache mod
 - python 3.x
+
 
 ### Installation
 - Download scripts here to your user's home directory (or wherever you like).  I put mine in `/home/tycon/timelapse`.  My user tycon is in the www-data group.
@@ -34,4 +37,19 @@ Simple scripts to create daily timelapse videos from Zoneminder and archive them
      XSendFile On
      XSendFilePath "/external/zoneminder/tl"
     ```
-- Add `tl.php` to `/usr/share/zoneminder/www/skins/classic/views` or where your zzoneminder php view files are.  
+- Add `tl.php` to `/usr/share/zoneminder/www/skins/classic/views` or where your zzoneminder php view files are.
+
+### Running
+- Run 
+  ```
+  python3 /full/path/to/maketl.py
+  ```
+- Log into Zoneminder and goto `https://[myzoneminderurl]/zm/?view=tl`
+
+### Regenerating previews
+If you import timelapse videos and need to regenerate preview images for the web UI or you want to tune which hour the preview image is taken run `previews.py`.  See notes in the file.
+
+### More
+I wrote these scripts as a Python replacement for [https://github.com/grapekh/ZoneMinder_TimeLapse](https://github.com/grapekh/ZoneMinder_TimeLapse).  As far as I can tell Zoneminder changed the event storage path structure somewhere along the line and I prefered Python to Bash.  I have done very little testing etc. and there was quite a bit of tinkering to get everything working with Zoneminder.  I tried to focus on speed of the script and good logging.
+
+In the future I would like to improve the php page for displaying the videos (a lot can be done in this area).  In generally the structure of the scripts should also be improved with a single config file and more command line options. 
