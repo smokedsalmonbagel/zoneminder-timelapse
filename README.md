@@ -10,7 +10,7 @@ Archived timelapses over the year:<br>
 ### Requirements
 
 - Zoneminder > 1.34.  I am testing with 1.36.19. 
-- Events must be stored as jpegs using the directory scheme which includes the date as a folder within the camera id folder.  This is true if using jpegs in 1.36.
+- Events must be stored as jpegs using the directory scheme which includes the date as a folder within the camera id folder (This is called "medium").  This should be the default if using jpegs in 1.36.
 - Sendx Apache mod
 - python 3.x
 
@@ -46,6 +46,8 @@ Thanks to [https://github.com/allensarkisyan/VideoFrame](https://github.com/alle
     ```
 - Add `tl.php` to `/usr/share/zoneminder/www/skins/classic/views` or where your zoneminder php view files are.
 
+- Add `get_file.php` to `/usr/share/zoneminder/www/skins/classic/views` or where your zoneminder php view files are.
+
 ### Running
 - Run 
   ```
@@ -57,6 +59,6 @@ Thanks to [https://github.com/allensarkisyan/VideoFrame](https://github.com/alle
 If you import timelapse videos and need to regenerate preview images for the web UI or you want to tune which hour the preview image is taken run `previews.py`.  See notes in the file.
 
 ### More
-I wrote these scripts as a Python replacement for [https://github.com/grapekh/ZoneMinder_TimeLapse](https://github.com/grapekh/ZoneMinder_TimeLapse).  As far as I can tell Zoneminder changed the event storage path structure somewhere along the line and I prefered Python to Bash.  I have done very little testing etc. and there was quite a bit of tinkering to get everything working with Zoneminder.  I tried to focus on speed of the script and good logging.
+I wrote these scripts as a Python replacement for [https://github.com/grapekh/ZoneMinder_TimeLapse](https://github.com/grapekh/ZoneMinder_TimeLapse).  I prefered Python to Bash and many people use the "medium" storage scheme now.  I have done very little testing etc. and there was quite a bit of tinkering to get everything working with Zoneminder.  I tried to focus on speed of the script and good logging.
 
 In the future I would like to improve the php page for displaying the videos (a lot can be done in this area).  In generally the structure of the scripts should also be improved with a single config file and more command line options. 
