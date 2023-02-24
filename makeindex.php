@@ -46,19 +46,30 @@ $videos = array();
 		#print_r( $vids) . '<br><br>';
 		foreach ($vids as $i => $vid)
 		{
+			// Get the video path:
 			$vp = str_replace($tl_destination,'',$vid);
+			/* Break down video path to something like:
+			[0] =>
+			[1] => external
+			[2] => zoneminder
+			[3] => tl
+			[4] => c16
+			[5] => 22_12_24_00_00.mp4
+			*/
 			$vn = explode('/',$vid);
-			##print_r($vn);
-			$vc = $vn[4];
+			#print_r($vn);
+			$video_name_index = array_key_last($vn); #index of video name in path array
+			$vc = $vn[$video_name_index - 1]; //should be the 'video camera'
 			#echo $vc;
-			$ds = explode('_',str_replace('.mp4','',$vn[5]));
-			$vd = '20' . $ds[0] . '-' . $ds[1] . '-' .$ds[2] . ' ' . $ds[3] . ':' .$ds[4] . ':00';
+			
+			$ds = explode('_',str_replace('.mp4','',$vn[$video_name_index]));//date string
+			$vd = '20' . $ds[0] . '-' . $ds[1] . '-' .$ds[2] . ' ' . $ds[3] . ':' .$ds[4] . ':00';//video date - fix before year 2100 :-)
 			//echo $vd;
 			$videos[$vc][$i]['preview'] = Null;
 			$previews = scan_dir($path.'/'.$previews_dir_name.'/'.$ds[0].'_'.$ds[1].'_'.$ds[2].'/*.jpg');
 			if (sizeof($previews) > 0)
 			{
-				$target_hr = 11;
+				$target_hr = 19;
 				$difs = array();
 				$n=0;
 				foreach($previews as $p)
